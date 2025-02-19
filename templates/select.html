@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Options</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
+    <script src="https://d3js.org/d3.v6.min.js"></script> <!--Loads D3js for the nodeVisualizer script-->
+</head>
+<body>
+    <header class="header">
+        <a href="http://www.arizona.edu" class="logo-left">
+            <img src="static/images/ua_wordmark_line_logo_white_rgb.min.png" alt="University of Arizona Logo">
+        </a>
+    </header>
+    <div class="logo-below-header">
+        <a href="{{ url_for('home') }}"> 
+            <img src="{{ url_for('static', filename='images/sie-logo.png') }}" alt="SIE Logo" class="sie-logo"/>
+        </a>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+        <a href="{{ url_for('display_weights', filename=filename) }}" class="start-button">Back to Parent Child Weights</a>
+    </div>
+    <div style="text-align: center;">
+        <a href="{{ url_for('show_CPTs', filename=filename) }}" class="start-button">Show Conditional Probability Tables</a>
+    </div>
+    <main> 
+        <h1 style="color: #0C234B; font-size: 24px; margin-bottom: 20px;">Select Options For the Visible Nodes</h1>
+        <!-- Display Invisible Nodes -->
+        <div class="invisible-nodes">
+            <h2>Non-Visible Nodes</h2>
+            <ul>
+                {% for node in invisible_nodes %}
+                    <li>{{ node }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="invisible-nodes">
+            <h2>Visible Nodes</h2>
+        </div>
+        <form id="selectionForm">
+            <input type="hidden" name="filename" value="{{ filename }}">
+            {% for set in sets_of_options %}
+                <fieldset>
+                    <legend>{{ set.name }}</legend>
+                    {% for option in ["False", "True", "N/A"] %}
+                        <div>
+                            <input type="radio" id="{{ set.name }}-{{ loop.index }}" name="{{ set.name }}" value="{{ loop.index0 }}" {{ 'checked' if option == "N/A" }}>
+                            <label for="{{ set.name }}-{{ loop.index }}">{{ option }}</label>
+                        </div>
+                    {% endfor %}
+                </fieldset>
+            {% endfor %}
+        </form>
+    </main>
+    <!--moveable nodes canvas--> 
+    <div class="invisible-nodes">
+        <h2>Select radio button options for Bayesian network results to appear</h2>
+    </div>
+        <script src="{{ url_for('static', filename='js/nodeVisualizer.js') }}"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const formElement = document.getElementById('selectionForm');
+
+                function saveRadioStates() {
+                    const inputs = document.querySelectorAll('#selectionForm input[type="radio"]');
+                    const states = Array.from(inputs).map(input => ({
+                        name: input.name,
+                        checked: input.checked,
+                        value: input.value
+                    }));
+                    sessionStorage.setItem('radioStates', JSON.stringify(states));
+                }
+    
+                function restoreRadioStates() {
+                    const savedStates = JSON.parse(sessionStorage.getItem('radioStates'));
+                    if (savedStates) {
+                        savedStates.forEach(state => {
+                            let radio = document.querySelector(`input[name="${state.name}"][value="${state.value}"]`);
+                            if (radio) {
+                                radio.checked = state.checked;
+                            }
+                        });
+                    }
+                }
+
+                function fetchDataAndUpdateVisualizer(){
+                    const formData = new FormData(formElement);
+                    const data = Object.fromEntries(formData);
+                    data.filename = "{{ filename }}"; // Include the filename in the data
+            
+                    fetch('/get_bayes_JSON', {  // POST endpoint that can process selections
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const dataParsed = JSON.parse(data);
+                        updateData(dataParsed);
+                    })
+                    .catch(error => console.error('Error updating visualizer:', error));
+                }
+
+                 // Attach change event listener to the form
+                 formElement.addEventListener('change', function() {
+                    fetchDataAndUpdateVisualizer();
+                    saveRadioStates();  // Save states whenever any radio button changes
+                });
+            
+                 restoreRadioStates();  // Restore radio button states when page loads
+                 fetchDataAndUpdateVisualizer(); // Call the fetch function on initial page load to display the default visualization
+
+                });
+        </script>
+    </div>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 University of Arizona. All rights reserved.</p>
+            <p> Developed by Bennett Jackson under the supervision of Joe Gregory in the UArizona SIE Disruption Lab</p>       
+         </div>
+    </footer>
+</body>
+</html>

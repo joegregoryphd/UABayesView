@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Bayesian Netword Visualizer</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ url_for('static', filename='styles/style.css')}}" rel="stylesheet"/>
+    </head>
+    <body>
+        <header class="header">
+            <a href="http://www.arizona.edu" class="logo-left">
+                <img src="static/images/ua_wordmark_line_logo_white_rgb.min.png" alt="University of Arizona Logo">
+            </a>
+        </header>
+        <div class="logo-below-header">
+            <a href="{{ url_for('home') }}"> 
+                <img src="{{ url_for('static', filename='images/sie-logo.png') }}" alt="SIE Logo" class="sie-logo"/>
+            </a>
+        </div>
+        <main class="upload-main">
+            <h1>UA-BayesView File Upload</h1>
+            <div class="upload-container">
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <label for="fileUpload">Choose an OML file:</label>
+                    <input type="file" id="fileUpload" name="file" accept=".oml">
+                    <button type="submit">Upload File</button>
+                </form>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="container">
+                <p>&copy; 2024 University of Arizona. All rights reserved.</p>
+                <p> Developed by Bennett Jackson under the supervision of Joe Gregory in the UArizona SIE Disruption Lab</p>
+            </div>
+        </footer>
+    </body>
+</html>

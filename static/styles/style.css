@@ -1,0 +1,250 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    justify-content: start; /* Align children to the start of the page */
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    /*padding-top: 20px; /* Add some space at the top */
+    background-color: #fff;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+h1 {
+    font-size: 1.5em;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+header {
+    background-color: #AB0520;
+    color: white;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    padding: 0 15px;
+    line-height: 25px;
+}
+
+.logo-left {
+    float: left;
+    height: 25px; 
+    padding: 10px 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.logo-below-header {
+    text-align: left;
+    width: 100%; /* Make sure it spans the full width */
+    padding: 10px 0;
+}
+
+.sie-logo {
+    height: 65px; 
+    width: 300px; 
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+.upload-main{
+    min-height: calc(100vh - 120px);
+}
+
+.main {
+    text-align: center;
+    padding: 20px;
+}
+
+
+.intro-text {
+    margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.invisible-nodes h2 {
+    margin-bottom: 10px;
+    text-align: center;
+    color: #0C234B;
+}
+
+.invisible-nodes ul {
+    list-style-type: none;
+    padding: 10px;
+    background-color: #e9e9e9;
+    border-radius: 5px;
+}
+
+.invisible-nodes li {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.invisible-nodes li:last-child {
+    border-bottom: none;
+}
+
+.start-button {
+    background-color: #0C234B; 
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+.start-button:hover {
+    background-color: #002244; /* Darker UA blue */
+}
+
+.upload-container {
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    margin-top: 20px; /* Add some space between the header and the upload container */
+}
+
+input[type="file"] {
+    margin: 10px 0;
+}
+
+button {
+    background-color: #0C234B;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    align-items: center;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #001C48;
+}
+
+.site-footer {
+    width: 100%;
+    background-color: #0C234B;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto;
+}
+
+
+.site-footer .container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.site-footer p {
+    margin: 10px 0;
+}
+
+.site-footer a {
+    color: #ffcc00; /* University of Arizona Gold */
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+
+.space {
+    height: 50px;
+    flex-shrink: 0;
+}
+
+
+.cpt-container {
+    margin-left: 150px;
+    margin-right: 150px;
+}
+.cpt-table {
+    border-collapse: collapse;
+    margin: 20px;
+    width: 100%;
+    table-layout: fixed;
+    border: 2px solid #000000;
+}
+.cpt-table th, .cpt-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    overflow-wrap: break-word;
+    border: 2px solid #000000; 
+}
+.cpt-table th {
+    background-color: #808080;
+    color: black;
+}
+.cpt-table td {
+    background-color: #f9f9f9;
+}
+.cpt-table .header {
+    background-color: #BBBBBB;
+    color: black;
+}
+.cpt-table .probability-header {
+    background-color: #BBBBBB;
+    color: black;
+}
+.cpt-table .true {
+    background-color: #4CAF50;
+}
+.cpt-table .false {
+    background-color: #F44336; 
+}
+.center-text {
+    text-align: center;
+}
+
+.cpt-table .pass-fail-header {
+    width: 50%; 
+}
+
+.cpt-table .background-color {
+    background-color: #E4E4E4;
+}
+
+.weight-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 2px solid #000000;
+}
+.weight-table th, .weight-table td {
+    padding: 10px;
+    text-align: left;
+    border: 2px solid #000000;  
+}
+.weight-table th {
+    background-color: #BBBBBB; 
+    color: black;
+}
+.weight-table td {
+    background-color: #E4E4E4; 
+}

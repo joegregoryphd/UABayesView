@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bayesian Network Visualizer</title>
+    <meta name="description" content="A web-based tool for visualizing Bayesian networks, created for the University of Arizona.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
+</head>
+<body>
+    <header class="header">
+        <a href="http://www.arizona.edu" class="logo-left">
+            <img src="static/images/ua_wordmark_line_logo_white_rgb.min.png" alt="University of Arizona Logo">
+        </a>
+    </header>
+    <div class="logo-below-header">
+        <a href="{{ url_for('home') }}"> 
+            <img src="{{ url_for('static', filename='images/sie-logo.png') }}" alt="SIE Logo" class="sie-logo"/>
+        </a>
+    </div>
+    <main>
+        <h1>Verify Bayesian Weights</h1>
+        <table class="weight-table">
+            <tr>
+                <th>Child Node</th>
+                <th>Parent Nodes</th>
+                <th>Weights</th>
+                <th>Total Weight</th>
+            </tr>
+            {% for child, data in weight_data.items() %}
+            <tr>
+                <td>{{ child }}</td>
+                <td>{{ data.parents | join('<br>') | safe }}</td>
+                <td>{{ data.weights | join('<br>') | safe }}</td>
+                <td>{{ data.total_weight }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </main>
+    <div>
+        <a href="{{ url_for('select_options', filename=filename) }}" class="start-button">View Bayesian Network</a>
+    </div>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 University of Arizona. All rights reserved.</p>
+            <p> Developed by Bennett Jackson under the supervision of Joe Gregory in the UArizona SIE Disruption Lab</p>        
+        </div>
+    </footer>
+</body>
+</html>

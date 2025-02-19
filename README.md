@@ -62,5 +62,3 @@
 
 ### Stopping the Docker image
 - In Docker Desktop hit the stop button in the top right corner of the application
-
-# UABayesView

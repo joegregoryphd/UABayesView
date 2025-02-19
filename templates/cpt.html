@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Show CPTs</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
+</head>
+<body>
+    <header class="header">
+        <a href="http://www.arizona.edu" class="logo-left">
+            <img src="static/images/ua_wordmark_line_logo_white_rgb.min.png" alt="University of Arizona Logo">
+        </a>
+    </header>
+    <div class="logo-below-header">
+        <a href="{{ url_for('home') }}"> 
+            <img src="{{ url_for('static', filename='images/sie-logo.png') }}" alt="SIE Logo" class="sie-logo"/>
+        </a>
+    </div>
+    <div style="margin: 20px;">
+        <a href="{{ url_for('select_options', filename=filename) }}" class="start-button">Back to Bayesian Network Viewer</a>
+    </div>
+    <div class="cpt-container">
+        <h1>Conditional Probability Tables</h1>
+        {% for cpt in cpts %}
+        <table class="cpt-table">
+            <thead>
+                <tr>
+                    <th colspan="{{ cpt.parents|length + 2 }}" class="header">{{ cpt.name }}</th>
+                </tr>
+                <tr>
+                    {% for parent in cpt.parents %}
+                    <th class="header">{{ parent }}</th>
+                    {% endfor %}
+                    <th class="true">Pass</th>
+                    <th class="false">Fail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for condition_set in cpt.probabilities %}
+                <tr>
+                    {% for condition in condition_set.conditions %}
+                    <td
+                        {% set value = condition.split('=')[-1] %}
+                        {% if value == '1' %}
+                        class="background-color">True
+                        {% elif value == '0' %}
+                        class="background-color">False
+                        {% else %}
+                        >{{ value }}
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                    <td class="probability-value true">{{ '{:.3f}'.format(condition_set.True) }}</td>
+                    <td class="probability-value false">{{ '{:.3f}'.format(condition_set.False) }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div style="margin: 50px;"></div>
+    {% endfor %}
+    </div>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 University of Arizona. All rights reserved.</p>
+            <p> Developed by Bennett Jackson under the supervision of Joe Gregory in the UArizona SIE Disruption Lab</p>
+        </div>
+    </footer>
+</body>
+</html>

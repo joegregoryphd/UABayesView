@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bayesian Network Visualizer</title>
+    <meta name="description" content="A web-based tool for visualizing Bayesian networks, created for the University of Arizona.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
+</head>
+<body>
+    <header class="header">
+        <a href="http://www.arizona.edu" class="logo-left">
+            <img src="static/images/ua_wordmark_line_logo_white_rgb.min.png" alt="University of Arizona Logo">
+        </a>
+    </header>
+    <div class="logo-below-header">
+        <a href="{{ url_for('home') }}"> 
+            <img src="{{ url_for('static', filename='images/sie-logo.png') }}" alt="SIE Logo" class="sie-logo"/>
+        </a>
+    </div>
+    <main>
+        <section class="intro-text">
+            <h1>Welcome to UA-BayesView</h1>
+            <a href="{{ url_for('upload_file') }}" class="start-button">Click Here To Generate Bayesian Networks</a>
+
+            <h3> UA-BayesView is a web application developed by the UArizona SIE department to visualize bayesian networks from OML files</h3>
+            <h3>Transform Your OML Files into Dynamic Bayesian Networks</h3>
+            <p>UA-BayesView offers a cutting-edge web application designed to bridge the gap between complex data structures and intuitive, actionable insights. Our platform specializes in converting Ontology Modeling Language (OML) files into Bayesian networks, unlocking a world of possibilities for data analysis and decision-making.</p>
+            
+            <h3>What is an OML File?</h3>
+            <p>OML (Ontology Modeling Language) files are structured representations of knowledge within a specific domain. They define the relationships between different concepts, entities, and their attributes, making them crucial for semantic data processing and ontology engineering.</p>
+    
+            <h3>What is a Bayesian Network?</h3>
+            <p>A Bayesian network is a graphical model that represents a set of variables and their conditional dependencies via a directed acyclic graph (DAG). It is used for probabilistic reasoning, enabling the computation of probabilities for various outcomes, given certain evidence.</p>
+    
+            <h3>From Structure to Insight</h3>
+            <p>Our web application seamlessly converts your OML files into Bayesian networks. This process not only visualizes the intricate relationships and dependencies encoded in your OML file but also enables the application of Bayesian inference to derive probabilities of interest based on given evidence.</p>
+    
+            <h3>Empower Your Decision-Making</h3>
+            <p>By leveraging the power of Bayesian networks, UA-BayesView provides a platform for:</p>
+            <ul>
+                <li><strong>Predictive Analysis:</strong> Forecast outcomes based on your current data.</li>
+                <li><strong>Diagnostic Reasoning:</strong> Identify probable causes for observed events.</li>
+                <li><strong>Decision Support:</strong> Evaluate the effects of potential decisions before taking action.</li>
+            </ul>
+    
+            <h3>Easy to Use</h3>
+            <p>Designed with user experience in mind, UA-BayesView simplifies the complex process of converting OML files into actionable Bayesian networks. Upload your OML file, and let our app do the rest. Explore the generated Bayesian network, apply evidence, and observe the inferences - all within a few clicks.</p>
+    
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 University of Arizona. All rights reserved.</p>
+            <p> Developed by Bennett Jackson under the supervision of Joe Gregory in the UArizona SIE Disruption Lab</p>        
+        </div>
+    </footer>
+</body>
+</html>
